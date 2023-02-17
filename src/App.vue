@@ -1,11 +1,9 @@
 <script setup>
+import VueJsIdle from "@/components/VueJsIdle";
 </script>
 
 <template>
-  <header>
-    <h1>Hello!</h1>
-  </header>
-
+  <VueJsIdle/>
 </template>
 
 <style scoped>
