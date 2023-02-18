@@ -1,4 +1,5 @@
-import { defineComponent, h, PropType } from "vue";
+import type { PropType } from "vue";
+import { defineComponent, h } from "vue";
 
 const VueJsIdle = defineComponent({
   beforeUnmount() {
