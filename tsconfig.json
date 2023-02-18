@@ -1,0 +1,26 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.vite-config.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.vitest.json"
+    }
+  ],
+  "compilerOptions": {
+    "module": "es6",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "target": "es5",
+    "strict": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  },
+  "types": ["@types/jest"],
+  "include": ["src/**/*", "test"],
+  "exclude": ["node_modules", "dist", "coverage"]
+}
