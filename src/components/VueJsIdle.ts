@@ -53,7 +53,7 @@ const VueJsIdle = defineComponent({
         }
       }
     },
-    countdown() {
+    countdown: function () {
       this.setDisplay();
 
       if (this.time_difference <= 0) {
