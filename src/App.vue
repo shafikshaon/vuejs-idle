@@ -6,6 +6,7 @@ import VueJsIdle from "@/components/VueJsIdle";</script>
     :duration="300"
     :prompter_schedule="[60, 120]"
     :wait="1"
+    @active="active"
     @idle="onidle"
     @prompt="onprompt"
   />
@@ -21,6 +22,9 @@ export default {
     },
     onprompt(time) {
       console.log(time);
+    },
+    active() {
+      console.log('active')
     }
   }
 }

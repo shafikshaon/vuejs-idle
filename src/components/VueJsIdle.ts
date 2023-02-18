@@ -10,7 +10,7 @@ const VueJsIdle = defineComponent({
       this.display
     );
   },
-  emits: ["idle", "prompt"],
+  emits: ["idle", "prompt", "active"],
   props: {
     duration: {
       type: Number,
@@ -19,7 +19,7 @@ const VueJsIdle = defineComponent({
     },
     triggerEvents: {
       type: Array as PropType<(keyof WindowEventMap)[]>,
-      default: () => ["mousemove", "keypress"],
+      default: () => ["mousemove", "keypress", "click", "scroll"],
     },
     prompter_schedule: {
       type: Array as PropType<number[]>,
@@ -98,6 +98,9 @@ const VueJsIdle = defineComponent({
     idle() {
       this.$emit("idle");
     },
+    active() {
+      this.$emit("active");
+    },
     prompt() {
       this.$emit("prompt", this.time_difference);
     },
@@ -108,6 +111,7 @@ const VueJsIdle = defineComponent({
     clearTimer(event?: Event, loop = true) {
       window.clearInterval(this.timer);
       window.clearInterval(this.counter);
+      this.active();
       this.start = Date.now();
       this.time_difference = 0;
       this.setDisplay();
