@@ -1,19 +1,67 @@
 {
   "name": "vuejs-idle",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1",
+  "description": "A Vue.js plugin to detect idle or inactive users.",
+  "scope": "VueJsIdle",
+  "main": "build/index.umd.js",
+  "unpkg": "build/index.umd.js",
+  "module": "build/index.es.js",
+  "types": "build/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shafikshaon/vuejs-idle.git"
+  },
+  "keywords": [
+    "vue",
+    "vuejs",
+    "plugin",
+    "idle",
+    "vue-idle",
+    "v-idle"
+  ],
+  "author": "Shafikur Rahman <shafikshaon@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shafikshaon/vuejs-idle/issues"
+  },
+  "homepage": "https://github.com/shafikshaon/vuejs-idle#readme",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "test": "jest",
+    "build": "vue-tsc --noEmit && vite build",
+    "build:watch": "vite build --watch",
+    "preview": "vite preview --port 5050",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "publish": "npm run build && npm publish",
+    "test:unit": "vitest --environment jsdom"
   },
   "dependencies": {
-    "vue": "^3.2.45"
+    "vue": "^3.2.33"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.0.0",
-    "vite": "^4.0.0",
+    "@rushstack/eslint-patch": "^1.1.0",
+    "@types/jest": "^26.0.21",
+    "@types/jsdom": "^16.2.14",
     "@types/lodash-es": "^4.17.6",
-    "lodash-es": "^4.17.21"
+    "@types/node": "^16.11.27",
+    "@vitejs/plugin-vue": "^2.3.1",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "@vue/eslint-config-typescript": "^10.0.0",
+    "@vue/test-utils": "^2.2.10",
+    "@vue/tsconfig": "^0.1.3",
+    "eslint": "^8.5.0",
+    "eslint-plugin-vue": "^8.2.0",
+    "install": "^0.13.0",
+    "jest": "^26.6.3",
+    "jest-date-mock": "^1.0.8",
+    "jsdom": "^19.0.0",
+    "lodash-es": "^4.17.21",
+    "prettier": "^2.5.1",
+    "ts-jest": "^26.5.4",
+    "typescript": "~4.6.3",
+    "vite": "^2.9.5",
+    "vitest": "^0.28.5",
+    "vue-tsc": "^0.34.7"
   }
 }
