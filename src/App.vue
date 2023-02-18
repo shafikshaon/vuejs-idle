@@ -3,9 +3,10 @@ import VueJsIdle from "@/components/VueJsIdle";</script>
 
 <template>
   <VueJsIdle
-    :duration="300"
+    :duration="10"
     :prompter_schedule="[60, 120]"
     :wait="1"
+    :loop="false"
     @active="active"
     @idle="onidle"
     @prompt="onprompt"

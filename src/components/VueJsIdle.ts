@@ -32,7 +32,7 @@ const VueJsIdle = defineComponent({
     setDisplay() {
       // seconds since start
       this.time_difference = this.duration - (((Date.now() - this.start) / 1000) | 0);
-      if (this.time_difference < 0) {
+      if (this.time_difference < 0 && !this.loop) {
         return;
       }
       this.shouldRemind();
@@ -57,7 +57,7 @@ const VueJsIdle = defineComponent({
       this.setDisplay();
 
       if (this.time_difference <= 0) {
-        this.clearTimer(undefined, false);
+        this.clearTimer(undefined, this.loop);
       }
     },
     idle() {
@@ -77,10 +77,12 @@ const VueJsIdle = defineComponent({
       window.clearInterval(this.timer);
       window.clearInterval(this.counter);
       this.active();
-      this.start = Date.now();
-      this.time_difference = 0;
-      this.setDisplay();
-      this.setTimer();
+      if (loop) {
+        this.start = Date.now();
+        this.time_difference = 0;
+        this.setDisplay();
+        this.setTimer();
+      }
     },
   },
   mounted() {
@@ -118,6 +120,10 @@ const VueJsIdle = defineComponent({
     showTime: {
       type: Boolean,
       default: true,
+    },
+    loop: {
+      type: Boolean,
+      default: false,
     },
   },
   render() {
