@@ -1,36 +1,12 @@
 import { defineComponent, h, PropType } from "vue";
 
 const VueJsIdle = defineComponent({
-  render() {
-    return h(
-      "div",
-      {
-        class: "vuejs-idle",
-      },
-      this.display
-    );
-  },
-  emits: ["idle", "prompt", "active"],
-  props: {
-    duration: {
-      type: Number,
-      // default 300 seconds
-      default: 300,
-    },
-    triggerEvents: {
-      type: Array as PropType<(keyof WindowEventMap)[]>,
-      default: () => ["mousemove", "keypress", "click", "scroll"],
-    },
-    prompter_schedule: {
-      type: Array as PropType<number[]>,
-      // array of seconds
-      // emit "prompt" event on each second
-      default: (): number[] => [60],
-    },
-    wait: {
-      type: Number,
-      default: 0,
-    },
+  beforeUnmount() {
+    clearInterval(this.timer);
+    clearInterval(this.counter);
+    for (let i = this.triggerEvents.length - 1; i >= 0; i -= 1) {
+      window.removeEventListener(this.triggerEvents[i], this.clearTimer);
+    }
   },
   data(): {
     display: string;
@@ -51,18 +27,7 @@ const VueJsIdle = defineComponent({
       seconds: "",
     };
   },
-  mounted() {
-    setTimeout(() => {
-      this.start = Date.now();
-      this.setDisplay();
-      this.$nextTick(() => {
-        this.setTimer();
-        for (let i = this.triggerEvents.length - 1; i >= 0; i -= 1) {
-          window.addEventListener(this.triggerEvents[i], this.clearTimer);
-        }
-      });
-    }, this.wait * 1000);
-  },
+  emits: ["idle", "prompt", "active"],
   methods: {
     setDisplay() {
       // seconds since start
@@ -118,13 +83,50 @@ const VueJsIdle = defineComponent({
       this.setTimer();
     },
   },
-  beforeUnmount() {
-    clearInterval(this.timer);
-    clearInterval(this.counter);
-    for (let i = this.triggerEvents.length - 1; i >= 0; i -= 1) {
-      window.removeEventListener(this.triggerEvents[i], this.clearTimer);
-    }
+  mounted() {
+    setTimeout(() => {
+      this.start = Date.now();
+      this.setDisplay();
+      this.$nextTick(() => {
+        this.setTimer();
+        for (let i = this.triggerEvents.length - 1; i >= 0; i -= 1) {
+          window.addEventListener(this.triggerEvents[i], this.clearTimer);
+        }
+      });
+    }, this.wait * 1000);
+  },
+  props: {
+    duration: {
+      type: Number,
+      // default 300 seconds
+      default: 300,
+    },
+    triggerEvents: {
+      type: Array as PropType<(keyof WindowEventMap)[]>,
+      default: () => ["mousemove", "keypress", "click", "scroll"],
+    },
+    prompter_schedule: {
+      type: Array as PropType<number[]>,
+      // array of seconds
+      // emit "prompt" event on each second
+      default: (): number[] => [60],
+    },
+    wait: {
+      type: Number,
+      default: 0,
+    },
+    showTime: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  render() {
+    return h(
+      "div",
+      [this.showTime ? h('span', this.display) : h('span', '')],
+    );
   },
 });
+
 
 export default VueJsIdle;

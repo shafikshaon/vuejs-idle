@@ -9,6 +9,7 @@ import VueJsIdle from "@/components/VueJsIdle";</script>
     @active="active"
     @idle="onidle"
     @prompt="onprompt"
+    :show-time="true"
   />
 </template>
 
