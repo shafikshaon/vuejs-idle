@@ -1,6 +1,6 @@
 {
   "name": "vuejs-idle",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Vue.js plugin to detect idle or inactive users.",
   "scope": "VueJsIdle",
   "main": "build/index.umd.js",
@@ -37,9 +37,9 @@
     "test:unit": "vitest --environment jsdom"
   },
   "dependencies": {
-    "vue": "^3.2.33"
   },
   "devDependencies": {
+    "vue": "^3.2.33",
     "@rushstack/eslint-patch": "^1.1.0",
     "@types/jest": "^26.0.21",
     "@types/jsdom": "^16.2.14",
