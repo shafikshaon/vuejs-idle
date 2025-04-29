@@ -16,7 +16,7 @@ export default defineConfig({
     cssCodeSplit: false,
     lib: {
       entry: "src/install.ts",
-      name: pkg.scope,
+      name: pkg.scope || "VuejsIdle", // Use pkg.scope or fallback to "VuejsIdle"
       fileName: "index",
     },
     rollupOptions: {
@@ -45,6 +45,7 @@ export default defineConfig({
         },
         {
           format: "umd",
+          name: "VuejsIdle",
           globals: {
             vue: "Vue",
           },
